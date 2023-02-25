@@ -1,13 +1,11 @@
+
 package com.driver.model;
-
-
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Admin")
-public class Admin
-{
+public class Admin{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +15,7 @@ public class Admin
 
     String password;
 
-    public Admin()
-    {
+    public Admin() {
 
     }
 

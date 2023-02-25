@@ -3,13 +3,13 @@ package com.driver.services.impl;
 import com.driver.model.*;
 import com.driver.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.driver.repository.CustomerRepository;
 import com.driver.repository.DriverRepository;
 import com.driver.repository.TripBookingRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,7 +55,6 @@ public class CustomerServiceImpl implements CustomerService {
 		//Now we will delete the customer from the repository and as a result of cascading effect trips will also
 		//be deleted
 		customerRepository2.delete(customer);
-
 	}
 
 	@Override
@@ -99,15 +98,13 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void cancelTrip(Integer tripId)
-	{
+	public void cancelTrip(Integer tripId){
 		//Cancel the trip having given trip Id and update TripBooking attributes accordingly
 		TripBooking bookedTrip = tripBookingRepository2.findById(tripId).get();
 		bookedTrip.setStatus(TripStatus.CANCELED);
 		bookedTrip.setBill(0);
 		bookedTrip.getDriver().getCab().setAvailable(true);
 		tripBookingRepository2.save(bookedTrip);
-
 	}
 
 	@Override
@@ -117,6 +114,5 @@ public class CustomerServiceImpl implements CustomerService {
 		bookedTrip.setStatus(TripStatus.COMPLETED);
 		bookedTrip.getDriver().getCab().setAvailable(true);
 		tripBookingRepository2.save(bookedTrip);
-
 	}
 }

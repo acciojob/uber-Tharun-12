@@ -25,6 +25,7 @@ public class TripBooking{
     @JoinColumn
     Customer customer;
 
+
     //For mapping to driver(parent)
     @ManyToOne
     @JoinColumn
